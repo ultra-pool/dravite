@@ -1,6 +1,10 @@
+Community take over 10/08/2018
+===========================
+https://discord.gg/U7ssyw4
+
 
 Dravite development tree
-
+===========================
 Dravite is a PoS-based cryptocurrency.
 
 Development process
