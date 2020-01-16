@@ -994,12 +994,8 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 		nSubsidy = 0.15625 * COIN;
 	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 500000) {
 		nSubsidy =  0.078125 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 75000) {
-		nSubsidy = 0.625 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 1000000) {
-		nSubsidy = 0.0390625 * COIN;
 	} else {
-		nSubsidy = 0.01953125 * COIN;
+		nSubsidy = 16650 * COIN;
 	}
 
 	LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);
