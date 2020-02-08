@@ -992,14 +992,12 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 		nSubsidy = 0.3125 * COIN;
 	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 250000) {
 		nSubsidy = 0.15625 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 500000) {
+	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 < 500000) {
 		nSubsidy =  0.078125 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 75000) {
-		nSubsidy = 0.625 * COIN;
-	} else if (pindexBest->nHeight+1 > 5000 && pindexBest->nHeight+1 <= 1000000) {
-		nSubsidy = 0.0390625 * COIN;
+	} else if (pindexBest->nHeight+1 >= 500000 && pindexBest->nHeight+1 < 600000) {
+		nSubsidy =  16650 * COIN;
 	} else {
-		nSubsidy = 0.01953125 * COIN;
+		nSubsidy = 8325 * COIN;
 	}
 
 	LogPrint("creation", "GetProofOfWorkReward() : create=%s nSubsidy=%d\n", FormatMoney(nSubsidy), nSubsidy);
@@ -1011,8 +1009,16 @@ int64_t GetProofOfWorkReward(int64_t nFees)
 uint64_t GetProofOfStakeReward(const CBlockIndex* pindexPrev, uint64_t nCoinAge, int64_t nFees)
 {
 	uint64_t nSubsidy;
+	
+	if(pindexBest->nHeight+1 > 1 && pindexBest->nHeight+1 < 500000) {
+		nSubsidy = nCoinAge * GetCoinYearReward(pindexPrev->nHeight) * 33 / (365 * 33 + 8);
+	} else if (pindexBest->nHeight+1 >= 500000 && pindexBest->nHeight+1 < 600000){
+		nSubsidy = 20625;
+	} else {
+		nSubsidy = 10315;	
+	}
 
-	nSubsidy = nCoinAge * GetCoinYearReward(pindexPrev->nHeight) * 33 / (365 * 33 + 8);
+	
 
 	LogPrint("creation", "GetProofOfStakeReward(): coinYearReward=%d create=%s nCoinAge=%d\n", GetCoinYearReward(pindexPrev->nHeight), FormatMoney(nSubsidy), nCoinAge);
 
